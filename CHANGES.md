@@ -1,6 +1,7 @@
-v0.3.26 (dev)
-=============
+v0.3.26
+=======
 + fix for `hts_idx_set_meta` (#86)
++ support nim 2.2.4 (#88 thanks @telatin)
 
 v0.3.25
 =======
