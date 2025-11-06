@@ -6,10 +6,6 @@ import system
 import sequtils
 
 
-# Compatibility alias for Nim versions < 2
-when NimMajor < 2:
-  template newSeqUninit[T](len: Natural): untyped =
-    newSeqUninitialized[T](len)
 
 when defined(nimUncheckedArrayTyp):
   type CArray[T] = UncheckedArray[T]
@@ -840,7 +836,7 @@ type
 
 proc copy*(g: Genotypes): Genotypes =
   ## make a copy of the genotypes
-  var gts = newSeqUninit[int32](g.gts.len)
+  var gts = newSeqUninitialized[int32](g.gts.len)
   var src = g.gts[0]
   copyMem(gts[0].addr.pointer, src.addr.pointer, gts.len * sizeof(int32))
   return Genotypes(gts:gts, ploidy:g.ploidy)
@@ -934,7 +930,7 @@ proc `$`*(gs:Genotypes): string =
 
 proc alts*(gs:Genotypes): seq[int8] {.inline.} =
   ## return the number of alternate alleles. Unknown is -1.
-  result = newSeqUninit[int8](gs.len)
+  result = newSeqUninitialized[int8](gs.len)
   var i = 0
   for g in gs:
     result[i] = g.alts
