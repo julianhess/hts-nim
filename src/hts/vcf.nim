@@ -650,7 +650,7 @@ iterator vquery(v:VCF, region:string): Variant =
     raise newException(IOError, "No Index found for " & v.fname)
 
   var
-    read_func:ptr hts_readrec_func = cast[ptr hts_readrec_func](tbx_readrec)
+    read_func: hts_readrec_func = tbx_readrec
     ret = 0
     slen = 0
     s = kstring_t()
@@ -708,7 +708,7 @@ iterator query*(v:VCF, region: string): Variant =
         start: int64
         stop: int64
         tid:cint = 0
-        read_fn:ptr hts_readrec_func = cast[ptr hts_readrec_func](bcf_readrec)
+        read_fn: hts_readrec_func = bcf_readrec
 
       discard hts_parse_reg(region.cstring, start.addr, stop.addr)
       tid = bcf_hdr_name2id(v.header.hdr, region.split({':'}, maxsplit=1)[0].cstring)

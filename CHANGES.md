@@ -1,3 +1,7 @@
+v0.3.30
+=======
++ fix compilation on newer gcc by fixing callback signatures
+
 v0.3.26
 =======
 + fix for `hts_idx_set_meta` (#86)

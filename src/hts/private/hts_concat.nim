@@ -331,7 +331,7 @@ proc hts_idx_get_n_no_coor*(idx: ptr hts_idx_t): uint64 {.cdecl,
 proc hts_parse_reg*(s: cstring; beg: ptr int64; `end`: ptr int64): cstring {.cdecl,
     importc: "hts_parse_reg", dynlib: libname.}
 proc hts_itr_query*(idx: ptr hts_idx_t; tid: cint; beg: int64; `end`: int64;
-                   readrec: ptr hts_readrec_func): ptr hts_itr_t {.cdecl,
+                   readrec: hts_readrec_func): ptr hts_itr_t {.cdecl,
     importc: "hts_itr_query", dynlib: libname.}
 proc hts_itr_destroy*(iter: ptr hts_itr_t) {.cdecl, importc: "hts_itr_destroy",
     dynlib: libname.}
@@ -339,12 +339,12 @@ proc hts_itr_next*(fp: ptr BGZF; iter: ptr hts_itr_t; r: pointer; data: pointer)
     cdecl, importc: "hts_itr_next", dynlib: libname.}
 type
   hts_itr_query_func* = proc (idx: ptr hts_idx_t; tid: cint; beg: int64; `end`: int64;
-                           readrec: ptr hts_readrec_func): ptr hts_itr_t {.cdecl.}
+                           readrec: hts_readrec_func): ptr hts_itr_t {.cdecl.}
   hts_name2id_f* = proc (a1: pointer; a2: cstring): cint {.cdecl.}
 
 proc hts_itr_querys*(idx: ptr hts_idx_t; reg: cstring; getid: hts_name2id_f;
-                    hdr: pointer; itr_query: ptr hts_itr_query_func;
-                    readrec: ptr hts_readrec_func): ptr hts_itr_t {.cdecl,
+                    hdr: pointer; itr_query: hts_itr_query_func;
+                    readrec: hts_readrec_func): ptr hts_itr_t {.cdecl,
     importc: "hts_itr_querys", dynlib: libname.}
 ## ###########################
 ## # tbx

@@ -64,7 +64,7 @@ iterator query*(bi: BGZI, chrom: string, start:int64, stop:int64): string {.inli
   if tid == -1:
     stderr.write_line("[hts-nim] no intervals for ", chrom, " found in ", bi.path)
   # TODO: make itr an attribute on BGZI
-  var itr = hts_itr_query(bi.csi.tbx.idx, cint(tid), start, stop, cast[ptr hts_readrec_func](fn))
+  var itr = hts_itr_query(bi.csi.tbx.idx, cint(tid), start, stop, fn)
 
   var kstr = kstring_t(s:nil, m:0, l:0)
   var outstr = newStringOfCap(10000)
